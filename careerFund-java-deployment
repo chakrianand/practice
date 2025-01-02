@@ -1,0 +1,85 @@
+    1  ls
+    2  pwd
+    3  free -m
+    4  df -h
+    5   vi /etc/fstab 
+    6  sudo mount -o remount /dev/shm  
+    7  sudo mount -o remount /tmp
+    8  sudo fallocate -l 8G /swapfile
+    9  sudo dd if=/dev/zero of=/swapfile bs=1M count=8192
+   10  sudo chmod 600 /swapfile
+   11  sudo mkswap /swapfile
+   12  sudo swapon /swapfile
+   13  free -m 
+   14  mount -a 
+   15  df -h
+   16  swapon --show 
+   17  clear
+   18  yum install fontconfig java-17-* 
+   19  java --version
+   20  yum install maven
+   21  mvn -v
+   22  yum install git
+   23  git -v
+   24  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+   25  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+   26  yum install jenkins 
+   27  jenkins --version
+   28  systemctl start jenkins
+   29  systemctl enable jenkins
+   30  systemctl status jenkins
+   31  cat /var/lib/jenkins/secrets/initialAdminPassword
+   32  cat .bash_profile 
+   33  find / -name java
+   34  find / -name maven
+   35  find / -name git
+   36  find / -name jenkins
+   37  echo $PATH 
+   38  cat .bash_profile 
+   39  ll
+   40  cd ~
+   41  ll
+   42  nano .bash_profile
+   43  ll
+   44  git clone https://github.com/sreerastu/careerFund.git
+
+
+
+go to Jenkins dashboard
+go to manage-Jenkins==== manage-plagues== available-plagues==== GitHub intigration===and maven integration=== install
+go to globle-tools=== java and maven path enter
+go to newithem  select job name pipeline select
+code copy
+========
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/sreerastu/careerFund.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'java -jar target/Foundation-0.0.1-SNAPSHOT.jar'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and run successful.'
+        }
+        failure {
+            echo 'Build failed.'
+        }
+    }
+}
+
+save and apply and build now
