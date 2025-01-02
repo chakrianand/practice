@@ -1,0 +1,66 @@
+    REACTJS-NODEJS APPLICATION DEPLOYMENT PROCESS (freestyle-job)
+
+
+ ls
+    2  pwd
+    3  sudo apt update
+    4  sudo apt update -y
+    5  clear
+    6  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - 
+    7  ls
+    8  sudo apt-get install -y nodejs 
+    9  node -v
+   10  sudo apt-get update 
+   11  clear
+   12  sudo apt-get install fontconfig openjdk-17-jre 
+   13  java --version
+   14  clear
+   15  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc     https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key 
+   16  echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]"     https://pkg.jenkins.io/debian-stable binary/ | sudo tee     /etc/apt/sources.list.d/jenkins.list > /dev/null 
+   17  sudo apt-get update 
+   18  clear
+   19  sudo apt-get install jenkins 
+   20  sudo apt-get install git
+   21  git --version
+   22  sudo systemctl start jenkins
+   23  sudo systemctl enable jenkins
+   24  sudo systemctl status jenkins
+   25  cat /var/lib/jenkins/secrets/initialAdminPassword 
+   26  nvm -v
+   27  sudo apt-get install -y npm
+   28  npm -v
+   29  nvm
+   30  nodejs -v
+   31  ls
+   32  git clone https://github.com/SofiyaKhan16/Pharmetrade.git 
+   33  ls
+   34  history
+
+    JENKINS STEPS
+
+1.Go to Jenkins dash board open 
+2.Go to Manage Jenkins--> Available Plugins====== To Download NodeJs Plugin and Git Plugin
+3.Go to Global Tool ----> Select the Nodejs Installation ====== mension the version 18.2.0
+4.Go to New ithm select  job name  and  sdelect freestylejob and ok
+5.Configure scm  give the git url copy and give the credentials
+6.Build Triggers  for Poll SCM==== * * * * *
+7.Build Steps select the Execute shell and commends 
+ #!/bin/bash
+# Set NodeJS environment (if you added it in Global Tool Configuration)
+. $HOME/.nvm/nvm.sh
+nvm use <version>
+
+# Clean previous builds
+rm -rf build
+
+# Install dependencies
+npm install
+
+# Build the application
+npm run build
+
+
+
+and finally apply  % save 
+build now select
+ go console out
