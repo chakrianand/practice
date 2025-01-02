@@ -1,0 +1,61 @@
+ 1  ls
+    2  pwd
+    3  free -m
+    4  df -h
+    5  swapon -s
+    6  fdisk /dev/sbd
+    7  cat > chakri.txt
+    8  touch chakri
+    9  ls
+   10  ls -al
+   11  mkdir chakri
+   12  mkdir anand
+   13  ls
+   14  fdisk /dev/sbd
+   15  find / -name path
+   16  cd path
+   17  echo $PATH
+   18  ls -al
+   19  ls
+   20  part probe /dev/sbd
+   21  mk swap /dev/sbd
+   22  mkswap /dev/sbd
+   23  vi /etc/fstab 
+   24  ls
+   25  sudo mount -o remount /dev/shm 
+   26  sudo mount -o remount /tmp 
+   27  df -h
+   28  free -m
+   29  sudo fallocate -l 8G /swapfile 
+   30  sudo dd if=/dev/zero of=/swapfile bs=1M count=8192 
+   31  sudo chmod 600 /swapfile 
+   32  sudo mkswap /swapfile 
+   33  partprobe /dev/sbd
+   34  sudo swapon /swapfile 
+   35  vi /etc/fstab 
+   36  cat /etc/fstab 
+   37  tmpfs /dev/shm tmpfs size=5G 0 0 
+   38  tmpfs /dev/shm tmpfs size=8G 0 0
+   39  tmpfs /tmp tmpfs size=8G 0 0 
+   40  vi /etc/fstab 
+   41  /swapfile none swap sw 0 0 
+   42  vi /etc/fstab 
+   43  tmpfs /tmp tmpfs size=8G 0 0 
+   44  vi /etc/fstab 
+   45  tmpfs /tmp tmpfs size=8G 0 0 
+   46  tmpfs /dev/shm tmpfs size=8G 0 0
+   47  vi /etc/fstab 
+   48  sudo chmod 600 /swapfile 
+   49  tmpfs /dev/shm tmpfs size=8G 0 0
+   50  sudo mkswap /swapfile 
+   51  sudo swapon /swapfile 
+   52  swpon --show
+   53  swapon --show
+   54  sudo fallocate -l 5G /swapfile (or) sudo dd if=/dev/zero of=/swapfile bs=1M count=5120 
+   55  swapon -s
+   56  free -m
+   57  df -h
+   58  ls -al
+   59  fdisk /dev/sbd
+   60  free -m
+  
