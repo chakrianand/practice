@@ -1,0 +1,92 @@
+    
+
+
+            	DockerFile on Pharmetrade
+	
+    1  ls
+    
+	2  pwd
+
+    3  sudo yum update -y
+
+    4  sudo yum install -y docker
+
+    5  sudo systemctl start docker
+	
+	6  sudo systemctl enable docker
+
+    7  sudo systemctl status docker
+
+    8  sudo usermod -aG docker ec2-user  
+
+    9  sudo yum install git -y
+
+    10 git -v	
+
+    11 git clone https://github.com/pharmetradegithub/Pharmetrade.git     Git User name and password
+    
+    12 ll
+
+    13 cd Pharmetrade
+    
+    14 ll 
+
+    15 vi DockerFile 
+     COPY THE DockerFile 
+    
+    # Stage 1: Build the application
+FROM node:18 as build
+
+# Set the working directory
+WORKDIR /app
+
+# Set proxy if required
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+ENV HTTP_PROXY=${HTTP_PROXY}
+ENV HTTPS_PROXY=${HTTPS_PROXY}
+
+# Copy package.json and package-lock.json to install dependencies
+COPY package*.json ./
+
+# Configure npm proxy if necessary
+RUN npm config set proxy ${HTTP_PROXY} && \
+    npm config set https-proxy ${HTTPS_PROXY}
+
+# Install dependencies
+RUN npm install
+
+# Copy all project files to the working directory
+COPY . .
+
+# Build the application for production
+RUN npm run build
+
+# Stage 2: Serve the production build
+FROM node:18 as production
+
+# Set the working directory
+WORKDIR /app
+
+# Install a lightweight HTTP server to serve the static files
+RUN npm install -g serve
+
+# Copy only the built files from the build stage
+COPY --from=build /app/dist ./dist
+
+# Expose the port
+EXPOSE 5173
+
+# Command to serve the files
+CMD ["serve", "-s", "dist", "-l", "5173"]	 save
+ 
+   16 docker build -t pharmetrade-app .
+   
+   17 docker images
+   
+   18 docker run -p 5173:5173 pharmetrade-app
+    
+   19 docker ps
+   
+   copy IP Address and go to browser port nbr add 5173
+
