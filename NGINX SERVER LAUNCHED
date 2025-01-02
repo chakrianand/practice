@@ -1,0 +1,41 @@
+ NGINX SERVER LAUNCHED   
+   ls
+    2  pwd
+    3  sudo yum update -y
+    4  sudo yum install nginx -y
+    5  nginx -v
+    6  sudo systemctl start nginx
+    7  sudo systemctl enable nginx
+    8  sudo systemctl status nginx
+ =======>publiip copy and go to new tabe and enter<============
+    9  cd /usr/share/nginx/html/
+   10  ls
+   11  ll
+   ========> sudo nano index.html<========== 
+  
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chakrirandhi</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Chakri And Randhi</h1>
+</body>
+</html>
+=======>sudo nano index.html<==============
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChakradharNaiduDevops</title>
+</head>
+<body>
+<h1>Chakradahar And NaiduDevops</h1>
+</body>
+</html>
