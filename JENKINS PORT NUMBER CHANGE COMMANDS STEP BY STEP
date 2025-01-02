@@ -1,0 +1,33 @@
+==========>JENKINS PORT NUMBER CHANGE COMMANDS STEP BY STEP <==========
+
+     1. cd /usr/lib/systemd/system
+
+     2. ls
+
+     3. vi jenkins.service =====>esc :set number====>enter=====>go to 70th nbr change jenkins PORT nbr =====>esc :wq! 
+ 
+     4. systemctl restart jenkins
+
+     5. systemctl status jenkins
+     
+     6. sudo systemctl daemon-reload 
+
+     7. systemctl status jenkins
+
+     8. sudo systemctl stop jenkins
+
+     9. sudo systemctl start jenkins
+
+    10. sudo systemctl status jenkins
+
+
+TRIVY INSTALL Commands 
+
+wget https://github.com/aquasecurity/trivy/releases/download/v0.38.3/trivy_0.38.3_Linux-64bit.deb
+
+sudo dpkg -i trivy_0.38.3_Linux-64bit.deb
+
+trivy --version
+
+
+
