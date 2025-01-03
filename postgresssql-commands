@@ -24,7 +24,7 @@
    
    11  sudo cp /var/lib/pgsql/data/postgresql.conf /var/lib/pgsql/data/postgresql.conf.bck
    
-   12  sudo vi /var/lib/pgsql/data/postgresql.conf    [go to connections and authentication=== #-> remove and locathost remove add * tab  wq:! save]
+   12  sudo vi /var/lib/pgsql/data/postgresql.conf    [go to connections and authentication=== #-> remove # and locathost remove [listen_addresses = '*' undali] add '*' tab  wq:! save]
     
    13  sudo cp /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf.bck
    
