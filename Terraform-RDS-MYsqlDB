@@ -1,0 +1,104 @@
+vi variables.tf
+
+
+#variables.tf
+variable "access_key" {
+    description = "Access key to AWS console"
+}
+variable "secret_key" {
+    description = "Secret key to AWS console"
+}
+variable "region" {
+    description = "AWS region"
+}
+
+
+vi terraform.tfvars
+
+
+region = "ap-south-1"
+access_key = "<YOUR AWS CONSOLE ACCESS ID>"
+secret_key = "<YOUR AWS CONSOLE SECRET KEY>"main.tf
+
+
+vi main.tf
+
+
+provider "aws" {
+    region     = "${var.region}"
+    access_key = "${var.access_key}"
+    secret_key = "${var.secret_key}"
+}
+
+#create a security group for RDS Database Instance
+resource "aws_security_group" "rds_sg" {
+  name = "rds_sg"
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+#create a RDS Database Instance
+resource "aws_db_instance" "rds" {
+  engine               = "mysql"
+  identifier           = "myrdsinstance"
+  allocated_storage    =  20
+  engine_version       = "5.7"
+  instance_class       = "db.t3.micro"
+  username             = "admin"
+  password             = "admin12345"
+  parameter_group_name = "default.mysql5.7"
+  vpc_security_group_ids = ["${aws_security_group.rds_sg.id}"]
+  skip_final_snapshot  = true
+  publicly_accessible =  true
+}
+
+
+vi output.tf
+
+output "security_group_id" {
+  value       = aws_security_group.rds_sg.id
+}
+output "db_instance_endpoint" {
+  value       = aws_db_instance.rds.endpoint
+}
+
+
+Used Commands
+
+ls
+    2  pwd
+    3  wget https://releases.hashicorp.com/terraform/1.10.3/terraform_1.10.3_linux_386.zip 
+    4  ls
+    5  yum install unzip
+    6  ls
+    7  unzip terraform_1.10.3_linux_386.zip 
+    8  ls
+    9  mkdir chakri
+   10  ls
+   11  sudo mv terraform /usr/local/bin/
+   12  terraform -v
+   13  export PATH=$PATH:$(pwd)
+   14  export PATH=$PATH:/path/to/terraform/directory
+   15  source ~/.bashrc
+   16  ls -l /usr/local/bin/terraform
+   17  sudo chmod +x /usr/local/bin/terraform
+   18  ls
+   19  unzip terraform_1.10.3_linux_386.zip 
+   20  ls
+   21  terraform -v
+   22  cd chakri/
+
+
+terraform init
+terraform validate
+terraform plan
+terraform apply
